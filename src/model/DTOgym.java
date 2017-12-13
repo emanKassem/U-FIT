@@ -4,13 +4,14 @@ public class DTOgym {
     private String firstName , lastName , password, email;
 
   
-    DTOgym (String firstname , String lastname, String password, String email)
+    public DTOgym (String firstname , String lastname, String password, String email)
     {
     	 this.firstName= firstname;
     	 this.lastName=lastname;
     	 this.password= password ;
     	 this.email=email;
     }
+    
 	public String getFirstName() {
 		return firstName;
 	}
