@@ -1,9 +1,40 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Employee {
 	
 	int id ;
 	String email , password , job;
+	
+	
+	ArrayList<Exercise> listExercise=new ArrayList<Exercise>();
+	public ArrayList<Exercise> getListExercise() {
+		return listExercise;
+	}
+	public void setListExercise(ArrayList<Exercise> listExercise) {
+		this.listExercise = listExercise;
+	}
+	
+	
+	ArrayList<Trainee> listTrainee=new ArrayList<Trainee>();
+	public ArrayList<Trainee> getListTrainee() {
+		return listTrainee;
+	}
+	public void setListTrainee(ArrayList<Trainee> listTrainee) {
+		this.listTrainee = listTrainee;
+	}
+	
+	ArrayList<Ads> listAds=new ArrayList<Ads>();
+	public ArrayList<Ads> getListAds() {
+		return listAds;
+	}
+	public void setListAds(ArrayList<Ads> listAds) {
+		this.listAds = listAds;
+	}
+	
+	
+	
 	public String getEmail() {
 		return email;
 	}

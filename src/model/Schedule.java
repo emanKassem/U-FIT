@@ -4,6 +4,13 @@ import java.awt.Image;
 
 public class Schedule {
 	private String email , day , exercise , notes;
+	Trainee t = new Trainee();
+	public Trainee getT() {
+		return t;
+	}
+	public void setT(Trainee t) {
+		this.t = t;
+	}
 	public String getEmail() {
 		return email;
 	}

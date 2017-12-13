@@ -5,6 +5,13 @@ import java.util.Date;
 
 public class Ads {
 	int id ;
+	Employee e = new Employee();
+	public Employee getE() {
+		return e;
+	}
+	public void setE(Employee e) {
+		this.e = e;
+	}
 	public int getId() {
 		return id;
 	}

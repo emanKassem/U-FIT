@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Exercise {
 	private int id ;
 	public int getId() {
@@ -15,5 +17,12 @@ public class Exercise {
 		this.name = name;
 	}
 	private String name ;
+	ArrayList<Employee> listEmployee=new ArrayList<Employee>();
+	public ArrayList<Employee> getListEmployee() {
+		return listEmployee;
+	}
+	public void setListEmployee(ArrayList<Employee> listEmployee) {
+		this.listEmployee = listEmployee;
+	}
 
 }
