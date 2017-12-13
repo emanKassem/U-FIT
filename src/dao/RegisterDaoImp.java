@@ -2,27 +2,26 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.util.List;
-
 import model.DTOgym;
 
 
 public class RegisterDaoImp implements GenericDao  {
-    //Data attributes 
-	 private String firstName , lastName , password, email; 
+ 
 	
 	//database connection 
 	DataBaseConnection dbc = new DataBaseConnection ();
 	
+	//DTO object 
+	DTOgym dtobject ;
+
 	//constructor
 	public RegisterDaoImp (String firstname, String lastname, String password, String email) {
-		this.firstName = firstname ;
-		this.lastName = lastname ;
-		this.password = password ;
-		this.email =email;
+		
+		 dtobject = new DTOgym (firstname,lastname,password,email);
+		
 	}
 	
-	//DTO object 
-	DTOgym dtobject = new DTOgym (firstName,lastName,password,email);
+
 
 	@Override
 	public List<String> findAll() {

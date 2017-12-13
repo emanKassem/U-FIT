@@ -7,7 +7,7 @@ public interface GenericDao  {
 	
 	//Read methods
 	List <String> findAll();
-	List <String> findByID ();
+	List <String> findByID();
 
 	//Insert method 
 	boolean insert(String t) ;
