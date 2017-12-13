@@ -10,13 +10,13 @@ public interface GenericDao  {
 	List <String> findByID();
 
 	//Insert method 
-	boolean insert(String t) ;
+	void insert() ;
 	
 	//update method 
-	boolean update(String t);
+	void update(String t);
 	
 	//delete method 
-	boolean delete(String t);
+	void delete(String t);
 	
 	
 	
