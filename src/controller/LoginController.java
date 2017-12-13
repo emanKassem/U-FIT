@@ -26,24 +26,21 @@ public class LoginController {
 			}
 		}else {
 			
-			/*LoginView lv = new LoginView();
+			/*LoginòServiceResponse lv = new LoginòServiceResponse();
 			lv.checkMessage("please Enter valid email", email);*/
 		}
 		
 	}
 	
 	public void daoResponse(String message, String email) {
-		if(message == "success") {
-			/*LoginView lv = new LoginView();
-			lv.checkMessage(message, email);*/
-		}else {
+		if(message != "success") {
 			active--;
 			if(active == 0) {
 				//LoginDao.daoActive(0, email);
 				active = 3;
-			}			
-			/*LoginView lv = new LoginView();
-			lv.checkMessage(message, email);*/
+			}	
 		}
+			/*LoginòServiceResponse lv = new LoginòServiceResponse();
+			lv.checkMessage(message, email);*/
 	}
 }
