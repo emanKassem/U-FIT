@@ -3,13 +3,7 @@ package model;
 public class Trainee {
 	
 	String email , password , address , firstName , lastName  ;
-	Employee e = new Employee();
-	public Employee getE() {
-		return e;
-	}
-	public void setE(Employee e) {
-		this.e = e;
-	}
+	
 	Schedule s = new Schedule();
 	public Schedule getS() {
 		return s;

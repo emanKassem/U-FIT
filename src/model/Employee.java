@@ -17,13 +17,7 @@ public class Employee {
 	}
 	
 	
-	ArrayList<Trainee> listTrainee=new ArrayList<Trainee>();
-	public ArrayList<Trainee> getListTrainee() {
-		return listTrainee;
-	}
-	public void setListTrainee(ArrayList<Trainee> listTrainee) {
-		this.listTrainee = listTrainee;
-	}
+	
 	
 	ArrayList<Ads> listAds=new ArrayList<Ads>();
 	public ArrayList<Ads> getListAds() {
