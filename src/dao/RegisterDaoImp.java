@@ -18,10 +18,10 @@ public class RegisterDaoImp implements GenericDao  {
 	public RegisterDaoImp (String firstname, String lastname, String password, String email) {
 		
 		 dtobject = new DTOgym (firstname,lastname,password,email);
+		 insert();
+		
 		
 	}
-	
-
 
 	@Override
 	public List<String> findAll() {
@@ -36,38 +36,46 @@ public class RegisterDaoImp implements GenericDao  {
 	}
 
 	@Override
-	public boolean insert(String t) {
+	public void insert() {
+		String message ;
+		String query = "insert into trainee (email,firstname,lastname,password,active) values (?,?,?,?,?)";
+			try {
+				
+				PreparedStatement pstmt = dbc.con.prepareStatement(query);
+				pstmt.setString(1, dtobject.getEmail());
+				pstmt.setString(2, dtobject.getFirstName());
+				pstmt.setString(3, dtobject.getLastName());
+				pstmt.setString(4, dtobject.getPassword());
+				pstmt.setString(5, "1");
+				pstmt.executeUpdate();
+				
+				//controller message
+				message="success";
+		     }
+		     catch (Exception e)
+		     {
+		    	 message="failed";
+		    	 
+		     }
+			//Controller cont= new controller (message,dto.getEmail());
 		
-		
-        String query= "INSERT INTO trainee (email, firstname, lastname, password) VALUES (?, ?, ?, ?)";
-     try {
-        PreparedStatement pstmt = dbc.con.prepareStatement(query);
-        
-        pstmt.setString(1,dtobject.getEmail());
-        pstmt.setString(2, dtobject.getFirstName());
-        pstmt.setString(3, dtobject.getLastName());
-        pstmt.setString(4, dtobject.getPassword());
-        
-        pstmt.executeQuery();
-     }
-     catch (Exception e)
-     {
-    	 e.printStackTrace();
-     }
-		return false;
 	}
 
 	@Override
-	public boolean update(String t) {
+	public void update(String t) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean delete(String t) {
+	public void delete(String t) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
+	
+
+
+
 }
 	
 	

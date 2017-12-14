@@ -9,7 +9,7 @@ public class DataBaseConnection {
 	String Username = "root";
 	String Password = "root";
 	
-	//connection variable 
+	//connection Object
  public Connection con = null ;
    
     //constructor 
