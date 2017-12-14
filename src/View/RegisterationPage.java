@@ -1,18 +1,9 @@
 package View;
 
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import java.awt.Color;
+ import javax.swing.*;
+ 
 
 public class RegisterationPage {
 
