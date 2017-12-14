@@ -1,7 +1,10 @@
+
 package dao;
 
 import java.sql.PreparedStatement;
 import java.util.List;
+
+import controller.LoginController;
 import model.DTOgym;
 
 
@@ -57,7 +60,7 @@ public class RegisterDaoImp implements GenericDao  {
 		    	 message="failed";
 		    	 
 		     }
-			//Controller cont= new controller (message,dto.getEmail());
+			LoginController logcontroller =new LoginController (dtobject.getEmail(),message);
 		
 	}
 
@@ -77,12 +80,3 @@ public class RegisterDaoImp implements GenericDao  {
 
 
 }
-	
-	
-
-	
-	
-	
-	
-
-

@@ -1,3 +1,4 @@
+
 package dao;
  
 import java.sql.*;
@@ -9,7 +10,7 @@ public class DataBaseConnection {
 	String Username = "root";
 	String Password = "root";
 	
-	//connection Object
+	//connection variable 
  public Connection con = null ;
    
     //constructor 
@@ -24,6 +25,6 @@ public class DataBaseConnection {
     		e.printStackTrace();
     	}
 	 
-	 }
-
+    }
 }
+
