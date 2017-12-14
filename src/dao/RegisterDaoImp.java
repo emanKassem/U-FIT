@@ -60,7 +60,7 @@ public class RegisterDaoImp implements GenericDao  {
 		    	 message="failed";
 		    	 
 		     }
-			LoginController logcontroller =new LoginController (dtobject.getEmail(),message);
+			//registerController logcontroller =new registerController (dtobject.getEmail(),message);
 		
 	}
 
