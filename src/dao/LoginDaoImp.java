@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package dao;
 
 import java.sql.*;
