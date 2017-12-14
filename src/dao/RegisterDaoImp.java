@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 import controller.LoginController;
-import model.DTOgym;
+import model.DTORegister;
 
 
 public class RegisterDaoImp implements GenericDao  {
@@ -15,19 +15,19 @@ public class RegisterDaoImp implements GenericDao  {
 	DataBaseConnection dbc = new DataBaseConnection ();
 	
 	//DTO object 
-	DTOgym dtobject ;
+	DTORegister dtobject ;
 
 	//constructor
 	public RegisterDaoImp (String firstname, String lastname, String password, String email) {
 		
-		 dtobject = new DTOgym (firstname,lastname,password,email);
+		 dtobject = new DTORegister (firstname,lastname,password,email);
 		 insert();
 		
 		
 	}
 
 	@Override
-	public DTOgym findAll() {
+	public List <String> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,10 +1,10 @@
 package model;
 
-public class DTOgym {
+public class DTORegister {
     private String firstName , lastName , password, email;
 
   
-    public DTOgym (String firstname , String lastname, String password, String email)
+    public DTORegister (String firstname , String lastname, String password, String email)
     {
     	 this.firstName= firstname;
     	 this.lastName=lastname;

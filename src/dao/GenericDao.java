@@ -3,13 +3,13 @@ package dao;
 
 import java.util.List;
 
-import model.DTOgym;
+import model.DTORegister;
 
 public interface GenericDao  {
 
 	
 	//Read methods
-	DTOgym findAll();
+	List <String>findAll();
 	List <String> findByID();
 
 	//Insert method 

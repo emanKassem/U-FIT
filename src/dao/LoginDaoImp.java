@@ -4,25 +4,36 @@ package dao;
 import java.sql.*;
 import java.util.List;
 
-import model.DTOgym;
+import controller.LoginController;
+import model.DTORegister;
 
 public class LoginDaoImp implements GenericDao {
-	     static Connection currentCon = null; 
-	     static ResultSet rs = null; 
-	     DTOgym dtobject;
+	
+	     //database connection 
+	     DataBaseConnection dbc = new DataBaseConnection ();
+	
+        // DTOLogin dtobject;
+	       LoginController conobject;
+	     
+	     //constructor to receive data from trainee 
+	     public LoginDaoImp(String email , String password){
+	    	 conobject = new LoginController (email,password);
+			 findAll();
+	     }
+	     
+	     
 	     @Override
-	     public  DTOgym findAll(){
-			int id ;
-			Statement stmt = null; 
+	     public  List <String> findAll(){
+			
+			/*
 			String email = dtobject.getEmail(); 
 			String password = dtobject.getPassword(); 
 			String searchQuery = "select * from trainee where email='" + email + "' AND password='" + password + "'" ; 
 			  
 			try {
-				//database connection 
-				DataBaseConnection dbc = new DataBaseConnection ();
-				stmt=currentCon.createStatement(); 
-				rs = stmt.executeQuery(searchQuery); 
+				
+				Statement stmt=dbc.con.createStatement(); 
+				ResultSet rs = stmt.executeQuery(searchQuery); 
 				boolean traineeExists = rs.next(); 
 				if (!traineeExists)  
 				    System.out.println("Email/Password entered is Incorrect or trainee doesnot Exists."); 
@@ -37,6 +48,9 @@ public class LoginDaoImp implements GenericDao {
 				System.out.println("Log In failed: An Exception has occurred! " + ex); 
 				} 
 				return dtobject; 
+				*/
+	    	 
+	    	 return null;
 				}  
 			
 	     @Override
@@ -59,8 +73,6 @@ public class LoginDaoImp implements GenericDao {
 	 		// TODO Auto-generated method stub
 	 		
 	 	}
-		
-
 	
 }
     
