@@ -1,31 +1,33 @@
+
 package dao;
 
 import java.sql.PreparedStatement;
 import java.util.List;
 
+import controller.LoginController;
 import model.DTOgym;
 
 
 public class RegisterDaoImp implements GenericDao  {
-    //Data attributes 
-	 private String firstName , lastName , password, email; 
+ 
 	
 	//database connection 
 	DataBaseConnection dbc = new DataBaseConnection ();
 	
+	//DTO object 
+	DTOgym dtobject ;
+
 	//constructor
 	public RegisterDaoImp (String firstname, String lastname, String password, String email) {
-		this.firstName = firstname ;
-		this.lastName = lastname ;
-		this.password = password ;
-		this.email =email;
+		
+		 dtobject = new DTOgym (firstname,lastname,password,email);
+		 insert();
+		
+		
 	}
-	
-	//DTO object 
-	DTOgym dtobject = new DTOgym (firstName,lastName,password,email);
 
 	@Override
-	public List<String> findAll() {
+	public DTOgym findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -37,45 +39,44 @@ public class RegisterDaoImp implements GenericDao  {
 	}
 
 	@Override
-	public boolean insert(String t) {
+	public void insert() {
+		String message ;
+		String query = "insert into trainee (email,firstname,lastname,password,active) values (?,?,?,?,?)";
+			try {
+				
+				PreparedStatement pstmt = dbc.con.prepareStatement(query);
+				pstmt.setString(1, dtobject.getEmail());
+				pstmt.setString(2, dtobject.getFirstName());
+				pstmt.setString(3, dtobject.getLastName());
+				pstmt.setString(4, dtobject.getPassword());
+				pstmt.setString(5, "1");
+				pstmt.executeUpdate();
+				
+				//controller message
+				message="success";
+		     }
+		     catch (Exception e)
+		     {
+		    	 message="failed";
+		    	 
+		     }
+			LoginController logcontroller =new LoginController (dtobject.getEmail(),message);
 		
-		
-        String query= "INSERT INTO trainee (email, firstname, lastname, password) VALUES (?, ?, ?, ?)";
-     try {
-        PreparedStatement pstmt = dbc.con.prepareStatement(query);
-        
-        pstmt.setString(1,dtobject.getEmail());
-        pstmt.setString(2, dtobject.getFirstName());
-        pstmt.setString(3, dtobject.getLastName());
-        pstmt.setString(4, dtobject.getPassword());
-        
-        pstmt.executeQuery();
-     }
-     catch (Exception e)
-     {
-    	 e.printStackTrace();
-     }
-		return false;
 	}
 
 	@Override
-	public boolean update(String t) {
+	public void update(String t) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean delete(String t) {
+	public void delete(String t) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
+	
+
+
+
 }
-	
-	
-
-	
-	
-	
-	
-
-

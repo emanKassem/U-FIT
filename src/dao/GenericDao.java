@@ -1,23 +1,27 @@
+
 package dao;
 
 import java.util.List;
+
+import model.DTOgym;
 
 public interface GenericDao  {
 
 	
 	//Read methods
-	List <String> findAll();
-	List <String> findByID ();
+	DTOgym findAll();
+	List <String> findByID();
 
 	//Insert method 
-	boolean insert(String t) ;
+	void insert() ;
 	
 	//update method 
-	boolean update(String t);
+	void update(String t);
 	
 	//delete method 
-	boolean delete(String t);
+	void delete(String t);
 	
 	
 	
 }
+

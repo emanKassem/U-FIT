@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.ArrayList ;
 
 public class Employee {
 	
@@ -56,6 +56,4 @@ public class Employee {
 	public void setJob(String job) {
 		this.job = job;
 	}
-	
-
 }
