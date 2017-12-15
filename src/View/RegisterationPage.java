@@ -71,8 +71,9 @@ public class  RegisterationPage extends JFrame implements ActionListener {
 			 btn.setBounds(241, 372, 100, 39);
 			frame.getContentPane().add(btn);
 			frame.setVisible( true);
+			frame.setResizable( false);
 	}
-		@Override
+		@Override 
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()== btn)
 	        {
@@ -82,7 +83,4 @@ public class  RegisterationPage extends JFrame implements ActionListener {
 	        }
 			
 		}
-
-	 
-
 }
