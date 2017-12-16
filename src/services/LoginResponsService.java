@@ -5,13 +5,13 @@ import java.util.List;
 public class LoginResponsService {
 	
 	//constructor 
-	LoginResponsService(List <String> data)
+	public LoginResponsService(String message, String email)
 	{
-		sendToview(data);
+		sendToview(message, email);
 	}
 	
 	//methos to send data to view 
-	private void sendToview (List <String> data)
+	public void sendToview (String message, String email)
 	{
 		//NextView nv = NextView (data);
 		

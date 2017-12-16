@@ -9,7 +9,7 @@ public interface GenericDao  {
 
 	
 	//Read methods
-	List <String>findAll();
+	void findAll();
 	List <String> findByID();
 
 	//Insert method 

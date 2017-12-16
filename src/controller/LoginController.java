@@ -3,11 +3,15 @@ package controller;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dao.LoginDaoImp;
+import services.LoginResponsService;
+
 public class LoginController {
 	
 	private String email, password;
 	static int active = 0;
 	
+	public LoginController() {};
 	public LoginController(String email, String password) {
 		this.email = email;
 		this.password = password;
@@ -22,12 +26,11 @@ public class LoginController {
 		if(b == true) {
 			if(password != null) {
 				
-				//LoginDao ld = new LoginDao(email, password);
+				LoginDaoImp ld = new LoginDaoImp(email, password);
 			}
 		}else {
 			
-			/*LoginòServiceResponse lv = new LoginòServiceResponse();
-			lv.checkMessage("please Enter valid email", email);*/
+			LoginResponsService lv = new LoginResponsService("please Enter valid email and password", email);
 		}
 		
 	}
@@ -36,11 +39,11 @@ public class LoginController {
 		if(message != "success") {
 			active--;
 			if(active == 0) {
-				//LoginDao.daoActive(0, email);
+				LoginDaoImp ld = new LoginDaoImp();
+				ld.daoActive("0", email);
 				active = 3;
-			}	
+			}
 		}
-			/*LoginòServiceResponse lv = new LoginòServiceResponse();
-			lv.checkMessage(message, email);*/
+		LoginResponsService lv = new LoginResponsService(message, email);
 	}
 }

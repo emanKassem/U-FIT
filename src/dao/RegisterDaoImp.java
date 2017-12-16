@@ -27,9 +27,8 @@ public class RegisterDaoImp implements GenericDao  {
 	}
 
 	@Override
-	public List <String> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public void findAll() {
+
 	}
 
 	@Override

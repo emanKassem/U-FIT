@@ -1,5 +1,7 @@
 package services;
 
+import controller.LoginController;
+
 public class LoginRequestService {
 	
 	
@@ -14,6 +16,6 @@ public class LoginRequestService {
 	//method to send data to controller 
     private void sendToController (String email, String password)
     {
-    	//LoginController logcont = new LoginController(email,password);
+    	LoginController logcont = new LoginController(email,password);
     }
 }

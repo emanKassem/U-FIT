@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.List;
 
 import controller.LoginController;
+import model.DTOLogin;
 import model.DTORegister;
 
 public class LoginDaoImp implements GenericDao {
@@ -13,22 +14,24 @@ public class LoginDaoImp implements GenericDao {
 	     DataBaseConnection dbc = new DataBaseConnection ();
 	
         // DTOLogin dtobject;
-	       LoginController conobject;
-	     
+	        DTOLogin dtoLogin;
+	        
+	    //ControllerLogin
+	        LoginController lc = new LoginController();
+	       
+	     public LoginDaoImp() {};
 	     //constructor to receive data from trainee 
 	     public LoginDaoImp(String email , String password){
-	    	 conobject = new LoginController (email,password);
+	    	 dtoLogin = new DTOLogin(email, password);
 			 findAll();
 	     }
 	     
 	     
 	     @Override
-	     public  List <String> findAll(){
-			
-			/*
-			String email = dtobject.getEmail(); 
-			String password = dtobject.getPassword(); 
-			String searchQuery = "select * from trainee where email='" + email + "' AND password='" + password + "'" ; 
+	     public  void findAll(){
+
+	    	 
+			String searchQuery = "select * from trainee where email='" + dtoLogin.getEmail() + "' AND password='" + dtoLogin.getPassword() + "'" ; 
 			  
 			try {
 				
@@ -36,21 +39,17 @@ public class LoginDaoImp implements GenericDao {
 				ResultSet rs = stmt.executeQuery(searchQuery); 
 				boolean traineeExists = rs.next(); 
 				if (!traineeExists)  
-				    System.out.println("Email/Password entered is Incorrect or trainee doesnot Exists."); 
+				    lc.daoResponse("Email/Password entered is Incorrect or trainee doesnot Exists.", dtoLogin.getEmail()); 
 				else{
-					String firstName = rs.getString("firstName"); 
-					String lastName = rs.getString("lastName"); 
-					System.out.println("Welcome " + firstName + " " +lastName); 
-					
+				    lc.daoResponse("success", dtoLogin.getEmail());	
 				}
 			}catch (Exception ex) 
 				{ 
-				System.out.println("Log In failed: An Exception has occurred! " + ex); 
+				lc.daoResponse("Log In failed: An Exception has occurred! " + ex, dtoLogin.getEmail()); 
 				} 
-				return dtobject; 
-				*/
+ 
+				
 	    	 
-	    	 return null;
 				}  
 			
 	     @Override
@@ -72,6 +71,22 @@ public class LoginDaoImp implements GenericDao {
 	 	public void delete(String t) {
 	 		// TODO Auto-generated method stub
 	 		
+	 	}
+	 	
+	 	public void daoActive(String active, String email)
+	 	{
+	 		String query = "insert into trainee (active) values (?) where email='"+email+"'";
+			try {
+				
+				PreparedStatement pstmt = dbc.con.prepareStatement(query);
+				pstmt.setString(1, active);
+				pstmt.executeUpdate();
+
+		     }
+		     catch (Exception e)
+		     {
+		    	System.out.println(e.getMessage());
+		     }
 	 	}
 	
 }

@@ -1,5 +1,7 @@
 package services;
 
+import View.RegisterationPage;
+
 public class RegisterationServiceResponse {
 	
 	private String message;
@@ -15,7 +17,7 @@ public class RegisterationServiceResponse {
 
 	private void sendToView(String message, String email) {
 		
-		/*RegisterationView v = new RegisterationView();
-		v.checkMessage(message, email);*/
+		RegisterationPage v = new RegisterationPage();
+		//v.checkMessage(message, email);
 	}
 }
