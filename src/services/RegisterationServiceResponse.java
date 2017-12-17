@@ -18,6 +18,6 @@ public class RegisterationServiceResponse {
 	private void sendToView(String message, String email) {
 		
 		RegisterationPage v = new RegisterationPage();
-		//v.checkMessage(message, email);
+		v.response(message, email); 
 	}
 }

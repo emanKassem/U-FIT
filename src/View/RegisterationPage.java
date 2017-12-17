@@ -5,6 +5,8 @@ import java.awt.event. *;
 
 import javax.swing.*;
 
+import services.RegisterationServiceRequest;
+
 public class  RegisterationPage extends JFrame implements ActionListener {
 	 private JFrame frame;
 	 private JTextField firstname,lastname,email;
@@ -77,10 +79,28 @@ public class  RegisterationPage extends JFrame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()== btn)
 	        {
-	        JOptionPane.showMessageDialog(null, "Welcome Mr/Ms " +  firstname.getText());
+				String fname=firstname.getText();
+				String lname=lastname.getText();
+				String mail=email.getText();
+				String pass=password.getText();
+				RegisterationServiceRequest rs=new RegisterationServiceRequest( fname,  lname,  mail,  pass);
+	           
 	           
 	        
 	        }
+			
+		}
+		public void response(String message,String email ) {
+			if(message=="success")
+			{
+				JOptionPane.showInputDialog("Registeration success"+message );	
+				//LoginView v=new LoginView();
+			}
+			else
+			{
+				JOptionPane.showInputDialog("Registeration failed" );
+			}
+			
 			
 		}
 }
