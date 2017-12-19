@@ -7,21 +7,9 @@ package model;
 
 public class Trainee {
 	
-	String email , password , address , firstName , lastName  ;
-	Employee e = new Employee();
-	public Employee getE() {
-		return e;
-	}
-	public void setE(Employee e) {
-		this.e = e;
-	}
-	Schedule s = new Schedule();
-	public Schedule getS() {
-		return s;
-	}
-	public void setS(Schedule s) {
-		this.s = s;
-	}
+	String email , password , firstName , lastName;
+	int schedule;
+
 	public String getEmail() {
 		return email;
 	}
@@ -33,12 +21,6 @@ public class Trainee {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -52,13 +34,19 @@ public class Trainee {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public boolean isActive() {
+	public String isActive() {
 		return active;
 	}
-	public void setActive(boolean active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
-	boolean active;
+	public int getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(int schedule) {
+		this.schedule = schedule;
+	}
+	String active;
 	
 	
 	
