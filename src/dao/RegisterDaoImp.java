@@ -74,6 +74,12 @@ public class RegisterDaoImp implements GenericDao  {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void select() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 

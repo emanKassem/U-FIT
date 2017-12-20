@@ -1,9 +1,16 @@
 package View;
 
-import java.awt.*;
-import java.awt.event. *;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import services.RegisterationServiceRequest;
 
@@ -67,6 +74,10 @@ public class  RegisterationPage extends JFrame implements ActionListener {
 			frame.getContentPane().add( password);
 			
 		  btn = new JButton("Register");
+		  btn.addActionListener(new ActionListener() {
+		  	public void actionPerformed(ActionEvent arg0) {
+		  	}
+		  });
 			 btn.setFont(new Font("Tahoma", Font.BOLD, 14));
 			 btn.setBackground(Color.LIGHT_GRAY);
 			 btn.setForeground(Color.GRAY);
