@@ -24,6 +24,7 @@ public class UserProfileDao implements GenericDao{
 	public void findAll() {
 		
 		String searchQuery = "select * from trainee where email='" + trainee.getEmail() + "'" ; 
+		String searchQueryForNutrionist;
 		
 		try {
 			Statement stmt=dbc.con.createStatement(); 
@@ -37,18 +38,24 @@ public class UserProfileDao implements GenericDao{
 		        if(trainee.getSchedule() == 1) {
 		        	
 		        	searchQuery = "select * from schedule2days" ; 
+		        	searchQueryForNutrionist = "SELECT * FROM nutritionist where schedule = 1";
 		        	
 		        }else if(trainee.getSchedule() == 2) {
 		        	
 		        	searchQuery = "select * from schedule3days" ;
+		        	searchQueryForNutrionist = "SELECT * FROM nutritionist where schedule = 2";
+
 		        	
 		        }else {
 		        	
 		        	searchQuery = "select * from scheduleeverydays" ;
+		        	searchQueryForNutrionist = "SELECT * FROM nutritionist where schedule = 3";
+
 		        	
 		        }   
 		        rs = stmt.executeQuery(searchQuery);
-	        	userProfileController.requestFromDao(trainee.getFirstName(), trainee.getLastName(), rs);
+		        ResultSet rs2 = stmt.executeQuery(searchQueryForNutrionist);
+	        	userProfileController.requestFromDao(trainee.getFirstName(), trainee.getLastName(), rs, rs2);
 		      }
 		      stmt.close();
 			
