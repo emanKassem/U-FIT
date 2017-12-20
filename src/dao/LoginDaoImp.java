@@ -87,7 +87,8 @@ public class LoginDaoImp implements GenericDao {
 		     {
 		    	System.out.println(e.getMessage());
 		     }
-	 	}
+	 	
+		}
 	
 }
     
