@@ -21,8 +21,7 @@ public interface GenericDao  {
 	//delete method 
 	void delete(String t);
 	
-	//select method
-	void select();
+	
 	
 	
 	

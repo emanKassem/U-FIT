@@ -87,11 +87,7 @@ public class LoginDaoImp implements GenericDao {
 		     {
 		    	System.out.println(e.getMessage());
 		     }
-	 	}
-		@Override
-		public void select() {
-			// TODO Auto-generated method stub
-			
+	 	
 		}
 	
 }

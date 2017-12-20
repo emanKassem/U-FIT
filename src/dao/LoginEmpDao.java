@@ -71,11 +71,7 @@ public class LoginEmpDao implements GenericDao  {
 	public void delete(String t) {
 		// TODO Auto-generated method stub
 		
-	}
-	@Override
-	public void select() {
-		// TODO Auto-generated method stub
-		
+	
 	}
 	
 

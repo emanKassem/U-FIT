@@ -27,6 +27,17 @@ public class AdminDao implements GenericDao{
 	@Override
 	public void findAll() {
 		// TODO Auto-generated method stub
+		try {
+			Object selection = null;
+			String textFieldSearch = null;
+			String query = " Select firstname , lastname , schedule , email From Test where "+selection+" = ?"; 
+			PreparedStatement pst = dbc.con.prepareStatement(query);
+			pst.setString(1, textFieldSearch);
+			ResultSet rs = pst.executeQuery();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 		
 	}
 	@Override
@@ -50,20 +61,7 @@ public class AdminDao implements GenericDao{
 		
 	}
 
-	@Override
-	public void select() {
-		try {
-		Object selection = null;
-		String textFieldSearch = null;
-		String query = " Select firstname , lastname , schedule , email From Test where "+selection+" = ?"; 
-		PreparedStatement pst = dbc.con.prepareStatement(query);
-		pst.setString(1, textFieldSearch);
-		ResultSet rs = pst.executeQuery();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
     
 	
 	
