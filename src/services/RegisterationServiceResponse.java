@@ -12,7 +12,6 @@ public class RegisterationServiceResponse {
 
 	private void sendToView(String message, String email) {
 		
-		RegisterationPage v = new RegisterationPage();
-		v.response(message, email); 
+		RegisterationPage v = new RegisterationPage(message, email);
 	}
 }

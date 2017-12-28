@@ -9,7 +9,7 @@ import services.LoginResponsService;
 public class LoginController {
 	
 	private String email, password;
-	static int active = 0;
+	static int active = 3;
 	
 	public LoginController() {};
 	public LoginController(String email, String password) {
@@ -24,7 +24,7 @@ public class LoginController {
 		Matcher matcher = pattern.matcher(email);
 		boolean b = matcher.matches();
 		if(b == true) {
-			if(password != null) {
+			if(password.length()>4) {
 				
 				LoginDaoImp ld = new LoginDaoImp(email, password);
 			}
@@ -36,14 +36,14 @@ public class LoginController {
 	}
 	
 	public void daoResponse(String message, String email) {
-		if(message != "success") {
+		/*if(message != "success") {
 			active--;
 			if(active == 0) {
 				LoginDaoImp ld = new LoginDaoImp();
 				ld.daoActive("0", email);
 				active = 3;
 			}
-		}
+		}*/
 		LoginResponsService lv = new LoginResponsService(message, email);
 	}
 }

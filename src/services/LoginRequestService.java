@@ -6,7 +6,7 @@ public class LoginRequestService {
 	
 	
 	//constructor
-	LoginRequestService (String email , String password)
+	public LoginRequestService (String email , String password)
 	{
 		
 		sendToController(email,password);

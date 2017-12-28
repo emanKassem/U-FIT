@@ -2,20 +2,16 @@ package services;
 
 import java.util.List;
 
+import View.LoginView;
+
 public class LoginResponsService {
 	
 	//constructor 
 	public LoginResponsService(String message, String email)
 	{
-		sendToview(message, email);
+		new LoginView(message, email);
 	}
 	
-	//methos to send data to view 
-	public void sendToview (String message, String email)
-	{
-		//NextView nv = NextView (data);
-		
-	}
 	
 
 }

@@ -30,6 +30,11 @@ public class  RegisterationPage extends JFrame implements ActionListener {
 	 public RegisterationPage()  {
 		initialize();
 	}
+	 
+	 public RegisterationPage(String message, String email) {
+		 response(message, email);
+	 }
+	 
 		public void initialize() {
 			frame = new JFrame();
 			frame.getContentPane().setForeground(Color.PINK);

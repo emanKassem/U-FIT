@@ -38,10 +38,11 @@ public class LoginDaoImp implements GenericDao {
 				Statement stmt=dbc.con.createStatement(); 
 				ResultSet rs = stmt.executeQuery(searchQuery); 
 				boolean traineeExists = rs.next(); 
-				if (!traineeExists)  
-				    lc.daoResponse("Email/Password entered is Incorrect or trainee doesnot Exists.", dtoLogin.getEmail()); 
+				if (!traineeExists) { 
+					lc.daoResponse("Email/Password entered is Incorrect or trainee doesnot Exists.", dtoLogin.getEmail());
+				}
 				else{
-				    lc.daoResponse("success", dtoLogin.getEmail());	
+				    lc.daoResponse("success", dtoLogin.getEmail());
 				}
 			}catch (Exception ex) 
 				{ 
