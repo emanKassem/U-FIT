@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 import controller.LoginController;
+import controller.RegisterController;
 import model.DTORegister;
 
 
@@ -13,14 +14,15 @@ public class RegisterDaoImp implements GenericDao  {
 	
 	//database connection 
 	DataBaseConnection dbc = new DataBaseConnection ();
+	RegisterController registerController = new RegisterController();
 	
 	//DTO object 
 	DTORegister dtobject ;
 
 	//constructor
-	public RegisterDaoImp (String firstname, String lastname, String password, String email) {
+	public RegisterDaoImp (String firstname, String lastname, String password, String email, int schedule) {
 		
-		 dtobject = new DTORegister (firstname,lastname,password,email);
+		 dtobject = new DTORegister (firstname,lastname,password,email, schedule);
 		 insert();
 		
 		
@@ -40,7 +42,7 @@ public class RegisterDaoImp implements GenericDao  {
 	@Override
 	public void insert() {
 		String message ;
-		String query = "insert into trainee (email,firstname,lastname,password,active) values (?,?,?,?,?)";
+		String query = "insert into trainee (email,firstname,lastname,password,active, schedule) values (?,?,?,?,?,?)";
 			try {
 				
 				PreparedStatement pstmt = dbc.con.prepareStatement(query);
@@ -49,6 +51,7 @@ public class RegisterDaoImp implements GenericDao  {
 				pstmt.setString(3, dtobject.getLastName());
 				pstmt.setString(4, dtobject.getPassword());
 				pstmt.setString(5, "1");
+				pstmt.setInt(6, dtobject.getSchedule());
 				pstmt.executeUpdate();
 				
 				//controller message
@@ -56,11 +59,10 @@ public class RegisterDaoImp implements GenericDao  {
 		     }
 		     catch (Exception e)
 		     {
-		    	 message="failed";
+		    	 message=e.getMessage();
 		    	 
-		     }
-			//registerController logcontroller =new registerController (dtobject.getEmail(),message);
-		
+		     }	
+			registerController.resopnse(dtobject.getEmail(), message);
 	}
 
 	@Override

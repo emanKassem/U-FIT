@@ -6,12 +6,15 @@ import javax.swing.border.LineBorder;
 
 import net.coobird.thumbnailator.Thumbnailator;
 import net.coobird.thumbnailator.Thumbnails;
+import net.proteanit.sql.DbUtils;
 import services.UserProfileRequestService;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,12 +36,12 @@ public class UserProfile extends JFrame {
 	public UserProfile() {
 	}
 
-	public void response(String firstname, String lastName, ResultSet rs, ResultSet rs2) {
+	public void response(String firstname, String lastName, ResultSet rs, String notes, InputStream trophic) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					initialize(firstname, lastName, rs, rs2);
+					initialize(firstname, lastName, rs, notes, trophic);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +50,7 @@ public class UserProfile extends JFrame {
 		});	
 	}
 
-	protected void initialize(String firstname, String lastName, ResultSet rs, ResultSet rs2) throws SQLException, IOException {
+	protected void initialize(String firstname, String lastName, ResultSet rs, String notes, InputStream trophic) throws SQLException, IOException {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 780, 563);
@@ -63,29 +66,34 @@ public class UserProfile extends JFrame {
 		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 21));
 		panel.add(lblNewLabel);
 		
-		JTextArea textArea = new JTextArea();
-		String nutritinistNotes = rs2.getString("nutritionist notes");
-		textArea.setText(nutritinistNotes);
+		TextArea textArea = new TextArea();
+		textArea.setFont(new Font("Courier New", Font.PLAIN, 15));
+		textArea.setEditable(false);
+		textArea.setText(notes);
 		textArea.setRows(7);
-		textArea.setColumns(70);
+		textArea.setColumns(40);
 		panel.add(textArea);
 		
 		JLabel lblNewLabel_1 = new JLabel("Trophic System");
 		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 21));
 		panel.add(lblNewLabel_1);
-				
-		Blob imageBlob = rs2.getBlob("trophic system");
-		byte[] imageBytes = imageBlob.getBytes(1, (int) imageBlob.length());
-		BufferedImage buff_image = ImageIO.read(new ByteArrayInputStream(imageBytes));
+		
+		try {
+		BufferedImage buff_image = ImageIO.read(trophic);
 		BufferedImage thumbnail = Thumbnails.of(buff_image).size(400, 400).asBufferedImage();
-		image = new ImageIcon(buff_image);
+		image = new ImageIcon(thumbnail);
+		System.out.println("test");
 		JLabel lblNewLabel_2 = new JLabel();
 		lblNewLabel_2.setIcon(image);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblNewLabel_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel.add(lblNewLabel_2);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		Panel panel_1 = new Panel();
+		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
 		panel_1.setBackground(SystemColor.inactiveCaptionBorder);
 		panel_1.setBounds(390, 41, 374, 483);
 		frame.getContentPane().add(panel_1);
@@ -94,20 +102,20 @@ public class UserProfile extends JFrame {
 		lblNewLabel_3.setFont(new Font("Times New Roman", Font.PLAIN, 21));
 		panel_1.add(lblNewLabel_3);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_1.add(scrollPane);
+		
 		userSchedule = new JTable();
+		userSchedule.setRowHeight(30);
+		userSchedule.setFont(new Font("Times New Roman", Font.PLAIN, 21));
 		userSchedule.setModel(DbUtils.resultSetToTableModel(rs));
 		userSchedule.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_1.add(userSchedule);
+		scrollPane.setViewportView(userSchedule);
 		
-		JLabel lbFirstName = new JLabel(firstname);
+		JLabel lbFirstName = new JLabel(firstname+" "+lastName);
 		lbFirstName.setFont(new Font("Script MT Bold", Font.PLAIN, 21));
-		lbFirstName.setBounds(287, 11, 104, 24);
+		lbFirstName.setBounds(352, 11, 150, 24);
 		frame.getContentPane().add(lbFirstName);
-		
-		JLabel lbLastName = new JLabel(lastName);
-		lbLastName.setFont(new Font("Script MT Bold", Font.PLAIN, 21));
-		lbLastName.setBounds(395, 11, 97, 24);
-		frame.getContentPane().add(lbLastName);
 	}
 
 	

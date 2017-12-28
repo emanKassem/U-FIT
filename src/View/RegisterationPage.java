@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,10 +14,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import services.RegisterationServiceRequest;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class  RegisterationPage extends JFrame implements ActionListener {
 	 private JFrame frame;
 	 private JTextField firstname,lastname,email;
+	 private JComboBox<String> schedul;
 	 private JPasswordField password;
 	 private JButton btn;
 	 public RegisterationPage()  {
@@ -76,42 +84,81 @@ public class  RegisterationPage extends JFrame implements ActionListener {
 		  btn = new JButton("Register");
 		  btn.addActionListener(new ActionListener() {
 		  	public void actionPerformed(ActionEvent arg0) {
+		  		
+		  		String fname=firstname.getText();
+				String lname=lastname.getText();
+				String mail=email.getText();
+				String pass=password.getText();
+				int schedulee;
+				// get the selected item:
+				String selectedSchedule = (String) schedul.getSelectedItem();
+				if(selectedSchedule == "2 Days") {
+					schedulee = 1;
+				}else if(selectedSchedule == "3 Days") {
+					schedulee = 2;
+				}else {
+					schedulee = 3;
+				}
+				RegisterationServiceRequest rs=new RegisterationServiceRequest( fname,  lname,  mail,  pass, schedulee);
+				
 		  	}
 		  });
 			 btn.setFont(new Font("Tahoma", Font.BOLD, 14));
 			 btn.setBackground(Color.LIGHT_GRAY);
 			 btn.setForeground(Color.GRAY);
-			 btn.setBounds(241, 372, 100, 39);
+			 btn.setBounds(321, 424, 100, 39);
 			frame.getContentPane().add(btn);
+			
+			JLabel lblNewLabel = new JLabel("Schedule :");
+			lblNewLabel.setForeground(Color.PINK);
+			lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+			lblNewLabel.setBounds(127, 350, 86, 23);
+			frame.getContentPane().add(lblNewLabel);
+			
+			String[] schedule = {"2 Days", "3 Days", "Every Days"};
+			schedul = new JComboBox<>(schedule);
+			schedul.setForeground(Color.PINK);
+			schedul.setBounds(241, 350, 107, 22);
+			frame.getContentPane().add(schedul);
+			
+			
 			frame.setVisible( true);
 			frame.setResizable( false);
 	}
-		@Override 
-		public void actionPerformed(ActionEvent e) {
-			if(e.getSource()== btn)
-	        {
-				String fname=firstname.getText();
-				String lname=lastname.getText();
-				String mail=email.getText();
-				String pass=password.getText();
-				RegisterationServiceRequest rs=new RegisterationServiceRequest( fname,  lname,  mail,  pass);
-	           
-	           
-	        
-	        }
-			
-		}
+		
 		public void response(String message,String email ) {
 			if(message=="success")
 			{
-				JOptionPane.showInputDialog("Registeration success"+message );	
+				JOptionPane.showMessageDialog(this, "Registeration success" );	
 				//LoginView v=new LoginView();
 			}
 			else
 			{
-				JOptionPane.showInputDialog("Registeration failed" );
+				JOptionPane.showMessageDialog(this, "Registeration failed: "+ message);
 			}
 			
 			
 		}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }

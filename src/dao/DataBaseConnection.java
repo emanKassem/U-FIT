@@ -8,13 +8,13 @@ public class DataBaseConnection {
 	
 	String URL = "jdbc:mysql://localhost/test";
 	String Username = "root";
-	String Password = "root";
+	String Password = "123456";
 	
 	//connection variable 
  public Connection con = null ;
    
     //constructor 
-    DataBaseConnection (){
+    public DataBaseConnection (){
 	 
     	try {
     		
