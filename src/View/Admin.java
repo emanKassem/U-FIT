@@ -1,98 +1,187 @@
 package View;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.SystemColor;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class Admin {
+import dao.DataBaseConnection;
 
-	private JFrame frame;
-	private JTextField textField;
-	private JTable table;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
-	
-	public Admin() {
-		initialize();
-	}
+		public class Admin extends javax.swing.JFrame {
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 485, 408);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.activeCaption);
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
-		
-		textField = new JTextField();
-		textField.setBounds(279, 11, 167, 20);
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(32, 11, 136, 20);
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Select", "First Name", "Last Name", "Active / NotActive"}));
-		panel.add(comboBox);
-		
-		table = new JTable();
-		table.setBounds(444, 118, -410, -32);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"First Name", "Last Name", "Schedule", "Email", "Active / NotActive"
+			 JFrame frame;
+		     JTextField txtDdmmyyy;
+		     String s;
+		     JLabel label;
+			 ResultSet rs;
+			 Connection con =null;
+			public Admin() {
+				initialize();
+			    
 			}
-		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(120);
-		table.getColumnModel().getColumn(1).setPreferredWidth(128);
-		table.getColumnModel().getColumn(2).setPreferredWidth(109);
-		table.getColumnModel().getColumn(3).setPreferredWidth(150);
-		table.getColumnModel().getColumn(4).setPreferredWidth(116);
-		panel.add(table);
-		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(220, 181, 226, 100);
-		panel.add(textArea);
-		
-		JLabel lblAddAdvertisement = new JLabel("Add Advertisement");
-		lblAddAdvertisement.setBounds(32, 156, 129, 14);
-		lblAddAdvertisement.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAddAdvertisement.setForeground(Color.BLACK);
-		lblAddAdvertisement.setBackground(Color.LIGHT_GRAY);
-		panel.add(lblAddAdvertisement);
-		
-		JButton btnPost = new JButton("Post");
-		btnPost.setBounds(178, 336, 136, 23);
-		btnPost.setForeground(SystemColor.activeCaption);
-		btnPost.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnPost.setBackground(Color.GRAY);
-		panel.add(btnPost);
-		
-		JLabel label = new JLabel("");
-		label.setBounds(10, 181, 200, 100);
-		panel.add(label);
-		
-		JButton btnUploadImage = new JButton("Upload Image");
-		btnUploadImage.setBackground(SystemColor.inactiveCaption);
-		btnUploadImage.setBounds(20, 288, 107, 23);
-		panel.add(btnUploadImage);
-	}
-}
+			
+			/**
+			 * Initialize the contents of the frame.
+			 */
+			private void initialize() {
+				frame = new JFrame();
+				frame.setBounds(100, 100, 487, 441);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				
+				JPanel panel = new JPanel();
+				panel.setBackground(SystemColor.activeCaption);
+				frame.getContentPane().add(panel, BorderLayout.CENTER);
+				panel.setLayout(null);
+				
+				JTextArea txtrWriteHereYour = new JTextArea();
+				txtrWriteHereYour.setText("Write Here Your Advetisment");
+				txtrWriteHereYour.setToolTipText("");
+				txtrWriteHereYour.setBounds(10, 216, 451, 90);
+				panel.add(txtrWriteHereYour);
+				
+				JLabel lblAddAdvertisement = new JLabel("Add Advertisement");
+				lblAddAdvertisement.setBounds(168, 11, 129, 14);
+				lblAddAdvertisement.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblAddAdvertisement.setForeground(Color.BLACK);
+				lblAddAdvertisement.setBackground(Color.LIGHT_GRAY);
+				panel.add(lblAddAdvertisement);
+				
+				JButton btnPost = new JButton("Post");
+				btnPost.setBounds(161, 369, 136, 23);
+				btnPost.setForeground(SystemColor.activeCaption);
+				btnPost.setFont(new Font("Tahoma", Font.BOLD, 13));
+				btnPost.setBackground(Color.GRAY);
+				panel.add(btnPost);
+				
+			    label = new JLabel("");
+				label.setBounds(10, 36, 451, 134);
+				panel.add(label);
+				
+				JButton btnUploadImage = new JButton("Upload Image");
+				btnUploadImage.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						JFileChooser fileChooser = new JFileChooser();
+				         fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.IMAGE", "jpg","gif","png");
+				         fileChooser.addChoosableFileFilter(filter);
+				         int result = fileChooser.showSaveDialog(null);
+				         if(result == JFileChooser.APPROVE_OPTION){
+				             File selectedFile = fileChooser.getSelectedFile();
+				             String path = selectedFile.getAbsolutePath();
+				             label.setIcon(ResizeImage(path));
+				             s = path;
+				              }
+				         else if(result == JFileChooser.CANCEL_OPTION){
+				             System.out.println("No Data");
+				         }
+					}
+				});
+				btnUploadImage.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent arg0) {
+					}
+				});
+				
+				
+				
+				btnUploadImage.setFont(new Font("Tahoma", Font.BOLD, 11));
+				btnUploadImage.setForeground(Color.BLACK);
+				
+				btnUploadImage.setBackground(SystemColor.inactiveCaption);
+				btnUploadImage.setBounds(10, 182, 150, 23);
+				panel.add(btnUploadImage);
+				
+				txtDdmmyyy = new JTextField();
+				txtDdmmyyy.setText("DD/MM/YYY");
+				txtDdmmyyy.setBounds(98, 335, 150, 20);
+				panel.add(txtDdmmyyy);
+				txtDdmmyyy.setColumns(10);
+				
+				JLabel lblDate = new JLabel("Date");
+				lblDate.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				lblDate.setBounds(30, 336, 58, 14);
+				panel.add(lblDate);
+				
+				
+				btnPost.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						 try{
+							 DataBaseConnection ad = new DataBaseConnection ();
+				                PreparedStatement ps=  ad.con.prepareStatement("insert into ads ( date , data , image  ) values ( ? ,? ,? )");
+				               InputStream is = new FileInputStream(new File(s));
+				               SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
+				               Date parsed = null;
+				               parsed = (Date) format.parse(txtDdmmyyy.getText().toString());
+				               java.sql.Date sql = new java.sql.Date(parsed.getTime());
+				               ps.setDate(1, sql);
+				                ps.setString(2, txtrWriteHereYour.getText());
+				                ps.setBlob(3, is);
+				                ps.executeUpdate();
+				               JOptionPane.showMessageDialog(null, "Data Inserted");
+				               }catch(Exception ex){
+				              // System.out.println("error");
+				               JOptionPane.showConfirmDialog(null,"error");
+				               ex.printStackTrace( );
+				               
+				           }
+						
+						
+					}
+				});
+				
+				frame.setVisible(true);
+				
+			}
+			 //Methode To Resize The ImageIcon
+		    public ImageIcon ResizeImage(String imgPath){
+		        ImageIcon MyImage = new ImageIcon(imgPath);
+		        Image img = MyImage.getImage();
+		        Image newImage = img.getScaledInstance(label.getWidth(), label.getHeight(),Image.SCALE_SMOOTH);
+		        ImageIcon image = new ImageIcon(newImage);
+		        return image;
+		    }
+
+			
+	
+
+		public static void main(String[] args) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						Admin window = new Admin();
+						window.frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+		}
