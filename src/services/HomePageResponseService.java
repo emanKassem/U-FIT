@@ -1,13 +1,18 @@
 package services;
 
+
+import java.util.ArrayList;
+
 import View.HomePage;
-import model.HomePageAdsDTO;
+import model.Images;
 
 public class HomePageResponseService {
+
 	
-	public HomePageResponseService (HomePageAdsDTO dto)
+	public HomePageResponseService (ArrayList<String> posts, ArrayList<Images> image)
 	{
-		 new HomePage (dto);
+		new HomePage(posts, image);
+		
 	}
 
 }

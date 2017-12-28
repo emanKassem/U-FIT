@@ -1,13 +1,17 @@
 package dao;
 
+import java.io.InputStream;
 import java.sql.ResultSet;
+
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import controller.HomePageController;
 import model.HomePageAdsDTO;
+import model.Images;
 
 public class HomePageDao implements GenericDao {
 	
@@ -17,41 +21,64 @@ public class HomePageDao implements GenericDao {
 	
 	// DTO object 
 	HomePageAdsDTO dto = new HomePageAdsDTO  ();
+	ArrayList<String> posts = new ArrayList<>();
+	//ArrayList<InputStream> image = new ArrayList<>();
+	ArrayList<Images> imgList = new ArrayList<Images>();
 	
-	//controller object 
-	 HomePageController controller = new  HomePageController();
+	
+	public HomePageDao (){
+		findAll();
+	}
 	
 
 	@Override
 	public void findAll() {
 		
 		String message ;
-		String query = "select date, data, image from ads order by id , desc" ;
+		String query = "SELECT * FROM ads ORDER BY date DESC" ;
+	
+		
 		
 		try {
 		    	
 			java.sql.Statement stmt = db.con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			
-			while (rs.next())
+		
+		
+	    /*  while (rs.next())
 			{
-				dto.setdate(rs.getString("date"));
-				dto.setpost(rs.getString("data"));
-				dto.setimage(rs.getBlob("image"));
 				
-			    rs = stmt.executeQuery(query);
-			    controller.callresponseService(dto);
-			}
+			    posts.add(rs.getString("data"));
+			    image.add(rs.getBinaryStream("image"));
+			  
+			}*/
+		
+			      while(rs.next()){
+			    	  
+			       posts.add(rs.getString("data"));
+			       Images img = new Images(rs.getBytes("image"));
+			       imgList.add(img);
+	
+			                 }
 			
-			stmt.close();
-	     	}catch (Exception e )
-		{
+			       rs.close();
+			        stmt.close();
+			   
+			   // call controller
+			   new HomePageController (posts, imgList);
+			 //  print (posts);
+			 
+		    
+	     	} catch (Exception e)
+		
+		    {
 	     		
-	     		message = "no posts found";
-		}
+	     		e.printStackTrace();
+		    }
+	
 		
 	}
-
+		
 	@Override
 	public List<String> findByID() {
 		// TODO Auto-generated method stub
@@ -76,5 +103,4 @@ public class HomePageDao implements GenericDao {
 		
 	}
 
-	
 }

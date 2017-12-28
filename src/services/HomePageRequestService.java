@@ -4,7 +4,7 @@ import controller.HomePageController ;
 
 public class HomePageRequestService {
 	
-	HomePageRequestService ()
+	public HomePageRequestService ()
 	{
 		new HomePageController ();
 	}

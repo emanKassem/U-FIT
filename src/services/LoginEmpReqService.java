@@ -6,18 +6,11 @@ import controller.LoginEmpController;
 public class LoginEmpReqService {
 	
 	//constructor
-	LoginEmpReqService (String email , String password)
+	public LoginEmpReqService (String email , String password, String job)
 	{
 		
-		sendToController(email,password);
+		new LoginEmpController(email,password, job);
 		
 	}
-
-	//method to send data to controller 
-    private void sendToController (String email, String password)
-    {
-       LoginEmpController lec = new LoginEmpController(email,password);
-    }
-	
 
 }

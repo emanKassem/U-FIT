@@ -1,22 +1,32 @@
 package controller;
 
-import java.sql.SQLException;
 
-import dao.HomePageDao;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.util.*;
+
 import model.HomePageAdsDTO;
+import model.Images;
+import dao.HomePageDao;
 import services.HomePageResponseService;
 
 public class HomePageController {
-
+	
+	//call Dao
 	public HomePageController ()
 	{
 		new HomePageDao ();
 		
 	}
 	
-	// method to call response service 
-		public void callresponseService (HomePageAdsDTO dto) throws SQLException
-		{
-			new HomePageResponseService (dto);
-		}
+	//call response service 
+     public HomePageController (ArrayList<String> posts, ArrayList<Images>image) throws SQLException
+	{
+		  
+    		new HomePageResponseService (posts, image);
+    }
+	  
+	   
+		
+		
 }

@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import controller.LoginController;
+import controller.LoginEmpController;
 import model.DTOEmpLogin;
 import model.DTOLogin;
 
@@ -17,12 +18,12 @@ public class LoginEmpDao implements GenericDao  {
        DTOEmpLogin dtoLogin;
        
    //ControllerLogin
-       LoginController lc = new LoginController();
+       LoginEmpController lc = new LoginEmpController();
       
     public LoginEmpDao() {};
     //constructor to receive data from employee
-    public LoginEmpDao(String email , String password){
-   	 dtoLogin = new DTOEmpLogin(email, password);
+    public LoginEmpDao(String email , String password, String job){
+   	 dtoLogin = new DTOEmpLogin(email, password, job);
 		 findAll();
     }
     
@@ -31,21 +32,24 @@ public class LoginEmpDao implements GenericDao  {
     public  void findAll(){
 
    	 
-		String searchQuery = "select * from employee where email='" + dtoLogin.getEmail() + "' AND password='" + dtoLogin.getPassword() + "'" ; 
+		String searchQuery = "select * from employees where email='" + dtoLogin.getEmail() + "' AND password='" + dtoLogin.getPassword() 
+		+ "' AND job='" + dtoLogin.getJob() + "'" ; 
 		  
 		try {
 			
 			Statement stmt=dbc.con.createStatement(); 
 			ResultSet rs = stmt.executeQuery(searchQuery); 
 			boolean empExists = rs.next(); 
-			if (!empExists)  
-			    lc.daoResponse("Email/Password entered is Incorrect or trainee doesnot Exists.", dtoLogin.getEmail()); 
+			if (!empExists) {
+				   lc.response("Email/Password entered is Incorrect or job not matched.", dtoLogin.getJob()); 
+			}
+
 			else{
-			    lc.daoResponse("success", dtoLogin.getEmail());	
+			    lc.response("success", dtoLogin.getJob());	
 			}
 		}catch (Exception ex) 
-			{ 
-			lc.daoResponse("Log In failed: An Exception has occurred! " + ex, dtoLogin.getEmail()); 
+			{  
+			ex.printStackTrace();
 			} 
 
 			

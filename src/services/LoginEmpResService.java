@@ -1,16 +1,12 @@
 package services;
 
+import View.LoginEmployee;
+
 public class LoginEmpResService {
 	//constructor 
-		public LoginEmpResService(String message, String email)
+		public LoginEmpResService(String message, String job)
 		{
-			sendToview(message, email);
+			new LoginEmployee(message, job);
 		}
 		
-		//method to send data to view 
-		public void sendToview (String message, String email)
-		{
-			//NextView nv = NextView (data);
-			
-		}
 }
