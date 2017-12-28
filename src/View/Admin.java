@@ -41,8 +41,21 @@ import java.io.InputStream;
 		     JLabel label;
 			 ResultSet rs;
 			 Connection con =null;
+			 SimpleDateFormat format;
+			 Date date;
 			public Admin() {
-				initialize();
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							initialize();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+				
 			    
 			}
 			
@@ -62,7 +75,7 @@ import java.io.InputStream;
 				JTextArea txtrWriteHereYour = new JTextArea();
 				txtrWriteHereYour.setText("Write Here Your Advetisment");
 				txtrWriteHereYour.setToolTipText("");
-				txtrWriteHereYour.setBounds(10, 216, 451, 90);
+				txtrWriteHereYour.setBounds(10, 36, 451, 90);
 				panel.add(txtrWriteHereYour);
 				
 				JLabel lblAddAdvertisement = new JLabel("Add Advertisement");
@@ -80,7 +93,7 @@ import java.io.InputStream;
 				panel.add(btnPost);
 				
 			    label = new JLabel("");
-				label.setBounds(10, 36, 451, 134);
+				label.setBounds(10, 190, 451, 134);
 				panel.add(label);
 				
 				JButton btnUploadImage = new JButton("Upload Image");
@@ -114,11 +127,13 @@ import java.io.InputStream;
 				btnUploadImage.setForeground(Color.BLACK);
 				
 				btnUploadImage.setBackground(SystemColor.inactiveCaption);
-				btnUploadImage.setBounds(10, 182, 150, 23);
+				btnUploadImage.setBounds(147, 148, 150, 23);
 				panel.add(btnUploadImage);
 				
 				txtDdmmyyy = new JTextField();
-				txtDdmmyyy.setText("DD/MM/YYY");
+	            format = new SimpleDateFormat("dd/MM/yyy");
+	            date = new Date();
+				txtDdmmyyy.setText(format.format(date));
 				txtDdmmyyy.setBounds(98, 335, 150, 20);
 				panel.add(txtDdmmyyy);
 				txtDdmmyyy.setColumns(10);
@@ -137,10 +152,8 @@ import java.io.InputStream;
 							 DataBaseConnection ad = new DataBaseConnection ();
 				                PreparedStatement ps=  ad.con.prepareStatement("insert into ads ( date , data , image  ) values ( ? ,? ,? )");
 				               InputStream is = new FileInputStream(new File(s));
-				               SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
-				               Date parsed = null;
-				               parsed = (Date) format.parse(txtDdmmyyy.getText().toString());
-				               java.sql.Date sql = new java.sql.Date(parsed.getTime());
+				               date = (Date) format.parse(txtDdmmyyy.getText().toString());
+				               java.sql.Date sql = new java.sql.Date(date.getTime());
 				               ps.setDate(1, sql);
 				                ps.setString(2, txtrWriteHereYour.getText());
 				                ps.setBlob(3, is);
@@ -148,7 +161,7 @@ import java.io.InputStream;
 				               JOptionPane.showMessageDialog(null, "Data Inserted");
 				               }catch(Exception ex){
 				              // System.out.println("error");
-				               JOptionPane.showConfirmDialog(null,"error");
+				               JOptionPane.showMessageDialog(Admin.this,ex.getMessage());
 				               ex.printStackTrace( );
 				               
 				           }
@@ -168,20 +181,4 @@ import java.io.InputStream;
 		        ImageIcon image = new ImageIcon(newImage);
 		        return image;
 		    }
-
-			
-	
-
-		public static void main(String[] args) {
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						Admin window = new Admin();
-						window.frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
 		}
