@@ -14,7 +14,7 @@ public class test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		new UserProfile("eman.kassem2014@gmail.com");
+		new RegisterationPage();
 	}
 
 }

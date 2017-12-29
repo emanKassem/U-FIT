@@ -130,7 +130,17 @@ import java.awt.event.ActionEvent;
 			
 		    	if(message=="success")
 				{
-					JOptionPane.showMessageDialog(this, "Login success" );	
+					JOptionPane.showMessageDialog(this, "Login success" );
+					System.out.println(job);
+					if(job == "Admin") {
+						System.out.println(job);
+						new Admin();
+					}else if(job == "Trainer") {
+						new TrainerPage();
+					}else if(job == "Nutritionist ") {
+						System.out.println(job);
+						new ViewDoctor();
+					}
 				}
 				else
 				{

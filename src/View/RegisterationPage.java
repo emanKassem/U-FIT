@@ -135,7 +135,7 @@ public class  RegisterationPage extends JFrame implements ActionListener {
 			if(message=="success")
 			{
 				JOptionPane.showMessageDialog(this, "Registeration success" );	
-				//LoginView v=new LoginView();
+				new HomePage(email);
 			}
 			else
 			{

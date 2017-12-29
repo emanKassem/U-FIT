@@ -36,8 +36,10 @@ public class HomePage {
 	private BufferedImage buff, buff2;
 	private static int postcounter = 0;
 	private Images imageObject ;
+	static String email;
 
 	public HomePage(String email) {
+		this.email = email;
 		new HomePageRequestService();
 	}
 	
@@ -93,15 +95,8 @@ public class HomePage {
 		profileButton.addActionListener(new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-							
-			//navigating to profile
-		    /*SecondPage userprofile = new   SecondPage ();
-		    userprofile.setVisible(true);
-		    userprofile.setSize(600, 400);
-		    userprofile.setTitle("Profile");
-			//secondpage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.dispose();*/ 
+			public void actionPerformed(ActionEvent e) {			
+				new UserProfile(email); 
 			}
 		});
 		
