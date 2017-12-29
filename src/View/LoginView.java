@@ -7,6 +7,8 @@ import services.LoginResponsService;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class LoginView extends JFrame implements ActionListener {
@@ -15,6 +17,7 @@ public class LoginView extends JFrame implements ActionListener {
 	JTextField email;
 	JPasswordField password;
 	JButton jButton1;
+	private JLabel lblNewLabel;
 
 	public LoginView(String message, String email) {
 		response(message, email);
@@ -44,26 +47,26 @@ public class LoginView extends JFrame implements ActionListener {
         jLabel2.setForeground(new java.awt.Color(255, 204, 204));
         jLabel2.setText("Email :");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(50, 110, 80, 30);
+        jLabel2.setBounds(50, 118, 80, 30);
 
          email.setText(" ");
         jPanel2.add(email);
-         email.setBounds(140, 110, 270, 40);
+         email.setBounds(168, 108, 270, 40);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 204));
         jLabel1.setText(" password :");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(10, 200, 110, 30);
+        jLabel1.setBounds(48, 192, 110, 30);
         jPanel2.add(password);
-        password.setBounds(140, 190, 270, 40);
+        password.setBounds(168, 190, 270, 40);
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(102, 102, 102));
         jButton1.setText(" Login");
         jPanel2.add(jButton1);
-        jButton1.setBounds(140, 290, 110, 40);
+        jButton1.setBounds(188, 267, 110, 40);
         jButton1.addActionListener(new ActionListener() {
 			
 			@Override
@@ -77,6 +80,19 @@ public class LoginView extends JFrame implements ActionListener {
 
         frame.getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 460, 390);
+        
+        lblNewLabel = new JLabel("Create a new account.. ");
+        lblNewLabel.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		new RegisterationPage();
+        		frame.dispose();
+        	}
+        });
+        lblNewLabel.setForeground(Color.PINK);
+        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        lblNewLabel.setBounds(169, 330, 192, 30);
+        jPanel2.add(lblNewLabel);
        frame.setVisible(true);
        frame.setResizable(false);
 	 }
