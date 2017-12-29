@@ -37,7 +37,7 @@ public class HomePage {
 	private static int postcounter = 0;
 	private Images imageObject ;
 
-	public HomePage() {
+	public HomePage(String email) {
 		new HomePageRequestService();
 	}
 	
@@ -200,12 +200,5 @@ public class HomePage {
 		
 	}
 	
-	public static void main (String args [] ) 
-	{
-        
-		new HomePage ();
-		//new HomePageRequestService ();
-		
-	}
 
 }

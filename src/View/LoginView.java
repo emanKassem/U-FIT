@@ -105,6 +105,7 @@ public class LoginView extends JFrame implements ActionListener {
 		if(message=="success")
 		{
 			JOptionPane.showMessageDialog(this, "Login success" );	
+			new HomePage(email);
 		}
 		else
 		{

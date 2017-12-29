@@ -106,7 +106,7 @@ public class UserProfile extends JFrame {
 		panel_1.add(scrollPane);
 		
 		userSchedule = new JTable();
-		userSchedule.setRowHeight(30);
+		userSchedule.setRowHeight(40);
 		userSchedule.setFont(new Font("Times New Roman", Font.PLAIN, 21));
 		userSchedule.setModel(DbUtils.resultSetToTableModel(rs));
 		userSchedule.setBorder(new LineBorder(new Color(0, 0, 0), 2));
